@@ -1,6 +1,6 @@
-import { UsuarioEntity } from 'src/usuario/usuario.entity';
-import { IsNotEmpty, } from 'class-validator';
+import { IsNotEmpty, IsOptional, } from 'class-validator';
 import { IsNotBlank } from 'src/decorators/is-not-blank.decorator';
+
 export class TramitesDto{
     
    
@@ -17,6 +17,10 @@ export class TramitesDto{
     tiposol?: string;
     @IsNotBlank({message: 'la fecha no puede estar vacio'})
     fecha?: Date;
+    
+    @IsOptional({ groups: ['someGroup'] })
+    @IsNotBlank({ groups: ['someGroup'] }) 
+    asignatura?: string;
 
 
 

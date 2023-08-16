@@ -26,7 +26,7 @@ export class UsuarioEntity{
     @Column({type: 'varchar', length: 10, nullable: false})
     jornada: string;
 
-    @Column({type: 'varchar', length: 10, nullable: false})
+    @Column({type: 'varchar', length: 100, nullable: false})
     programa: string;
 
     @Column({type: 'varchar', nullable: false})
@@ -34,6 +34,9 @@ export class UsuarioEntity{
 
     @Column({ type: 'uuid', name:'reset_password_token', nullable: true })
     resetPasswordToken: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    foto: string;
 
     @OneToMany(() => TramitesEntity, tramite => tramite.usuario)
     tramites: TramitesEntity[];

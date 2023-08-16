@@ -23,7 +23,7 @@ import { AsignacionModule } from './asignacion/asignacion.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        type: 'mariadb',
+        type: 'mysql',
         host: configService.get<string>(DB_HOST),
         port: +configService.get<number>(DB_PORT),
         username: configService.get<string>(DB_USER),

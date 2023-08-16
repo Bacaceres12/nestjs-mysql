@@ -12,7 +12,7 @@ export class ConsultaEntity{
   @JoinColumn({ name: 'tramite_id' })
   tramitesEntity: TramitesEntity;
 
-  @Column({ type: 'date', default: () => 'now()', nullable: false })
+  @Column({ type: 'date', nullable: false, default: null })
   fechaConsulta: Date;
   
     @Column({
@@ -21,6 +21,9 @@ export class ConsultaEntity{
         default: "En tramite"
       })
     estado: string;
+
+
+    
     @Column({type: 'varchar', nullable: false})
     Respuesta: string;
 

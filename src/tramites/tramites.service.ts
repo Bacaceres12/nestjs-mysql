@@ -88,6 +88,13 @@ export class TramitesService {
                         }
 
 
+                        async findByAsignatura(asignatura: string, usuario: UsuarioEntity): Promise<TramitesEntity> {
+                          const tramites = await this.tramitesRepository.findOne({
+                              where: { asignatura: asignatura, usuario: usuario },
+                            });
+                       return tramites;
+                          }
+  
                       
                         async findByTipoSol(tiposol: string, usuario: UsuarioEntity): Promise<TramitesEntity> {
                             const tramites = await this.tramitesRepository.findOne({
@@ -137,6 +144,7 @@ export class TramitesService {
                                 dto.jornada ? tramites.jornada = dto.jornada : tramites.jornada = tramites.jornada;
                                 dto.carrera ? tramites.carrera = dto.carrera : tramites.carrera = tramites.carrera;
                                 dto.tiposol ? tramites.tiposol = dto.tiposol : tramites.tiposol = tramites.tiposol;
+                                dto.asignatura ? tramites.asignatura = dto.asignatura : tramites.asignatura = tramites.asignatura;
                                 dto.fecha ? tramites.fecha = dto.fecha : tramites.fecha = tramites.fecha;
                                 tramites.usuario = usuario;
                                 await this.tramitesRepository.save(tramites);

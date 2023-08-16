@@ -7,6 +7,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 
 export class TramitesEntity{
 
+
     @PrimaryGeneratedColumn()
     idSolicitud: number;
     @Column({type: 'varchar',nullable: false, unique: true})
@@ -19,10 +20,13 @@ export class TramitesEntity{
     numerosd: string;
     @Column({type: 'varchar',nullable: false})  
     carrera: string;
-    
+  
+    @Column({type: 'varchar', nullable: true})
+    asignatura: string;
+
     @Column({
         type: 'enum',
-        enum: ["Cancelacion Asignatura", "Adicionar Asignatura", "Cita con el director"],
+        enum: ["Cancelacion Asignatura", "Adicionar Asignatura", "Cita con el director", "Otro"],
         default: "Cita con el director"
       })
     tiposol: string;

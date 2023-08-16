@@ -9,6 +9,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RolNombre } from 'src/rol/rol.enum';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { AsignarRolesDto } from './dto/asignar-roles.dto';
+import { createReadStream, createWriteStream } from 'fs';
+import { join } from 'path';
+
 
 @Injectable()
 export class UsuarioService {
@@ -92,6 +95,31 @@ export class UsuarioService {
         );
       
         usuario.roles = nuevosRoles;
+        await this.usuarioRepository.save(usuario);
+      
+        return usuario;
+      }
+
+      async uploadFoto(id: number, file: Express.Multer.File): Promise<UsuarioEntity> {
+        // Encuentra al usuario por su ID
+        const usuario = await this.usuarioRepository.findOne(id);
+        if (!usuario) {
+          throw new NotFoundException('Usuario no encontrado');
+        }
+      
+        // Guarda la imagen en una ruta específica
+        const filePath = join(__dirname, '..', 'uploads', file.filename);
+        await new Promise((resolve, reject) =>
+          createReadStream(file.path)
+            .pipe(createWriteStream(filePath))
+            .on('finish', resolve)
+            .on('error', reject)
+        );
+      
+        // Guarda la ruta de la imagen en la entidad del usuario
+        usuario.foto = filePath;
+      
+        // Guarda los cambios en la base de datos
         await this.usuarioRepository.save(usuario);
       
         return usuario;
