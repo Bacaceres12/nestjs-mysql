@@ -17,11 +17,12 @@ export class TramitesDto{
     tiposol?: string;
     @IsNotBlank({message: 'la fecha no puede estar vacio'})
     fecha?: Date;
-    
     @IsOptional({ groups: ['someGroup'] })
     @IsNotBlank({ groups: ['someGroup'] }) 
     asignatura?: string;
-
-
+    @IsOptional({ groups: ['someGroup'] })
+    motivo?: string;
+    @IsNotBlank({message: 'Seleccione en que semestre va por favor'})
+    semestre?: string;
 
 }

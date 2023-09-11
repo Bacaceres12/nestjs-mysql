@@ -74,4 +74,5 @@ async getAll(@Req() req): Promise<TramitesEntity[]> {
    
   }
 
+
   }

@@ -13,7 +13,6 @@ import { AsignaturasModule } from './asignaturas/asignaturas.module';
 import { AsignacionModule } from './asignacion/asignacion.module';
 
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -45,6 +44,6 @@ import { AsignacionModule } from './asignacion/asignacion.module';
     
   ],
   controllers: [AppController,],
-  providers: [AppService],
+  providers: [AppService,],
 })
 export class AppModule {}

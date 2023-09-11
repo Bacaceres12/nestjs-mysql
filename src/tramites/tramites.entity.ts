@@ -20,9 +20,12 @@ export class TramitesEntity{
     numerosd: string;
     @Column({type: 'varchar',nullable: false})  
     carrera: string;
-  
     @Column({type: 'varchar', nullable: true})
     asignatura: string;
+    @Column({ type: 'varchar', nullable: true })
+    motivo: string;
+    @Column({ type: 'varchar', nullable: true })
+    semestre: string;
 
     @Column({
         type: 'enum',

@@ -1,6 +1,6 @@
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UsuarioService } from './usuario.service';
-import { Body, Controller, Get, Post, UsePipes, ValidationPipe, Put, Param, InternalServerErrorException, HttpException, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Post, UsePipes, ValidationPipe, Put, Param, InternalServerErrorException, HttpException, UploadedFile, UseInterceptors, Req } from '@nestjs/common';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { AsignarRolesDto } from './dto/asignar-roles.dto';
 import { UsuarioEntity } from './usuario.entity';
@@ -68,8 +68,9 @@ async asignarRol(@Param('id') id: number, @Body() dto: AsignarRolesDto): Promise
 async uploadFoto(
     @Param('id') id: number,
     @UploadedFile() file: Express.Multer.File // Corregir el tipo de la variable "file"
-): Promise<UsuarioEntity> {
+): Promise<string> { // Cambiar el tipo de retorno a string
     return this.usuarioService.uploadFoto(id, file);
 }
+
 
 }

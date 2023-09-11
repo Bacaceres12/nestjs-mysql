@@ -100,14 +100,12 @@ export class UsuarioService {
         return usuario;
       }
 
-      async uploadFoto(id: number, file: Express.Multer.File): Promise<UsuarioEntity> {
-        // Encuentra al usuario por su ID
+      async uploadFoto(id: number, file: Express.Multer.File): Promise<string> {
         const usuario = await this.usuarioRepository.findOne(id);
         if (!usuario) {
           throw new NotFoundException('Usuario no encontrado');
         }
       
-        // Guarda la imagen en una ruta específica
         const filePath = join(__dirname, '..', 'uploads', file.filename);
         await new Promise((resolve, reject) =>
           createReadStream(file.path)
@@ -116,13 +114,12 @@ export class UsuarioService {
             .on('error', reject)
         );
       
-        // Guarda la ruta de la imagen en la entidad del usuario
-        usuario.foto = filePath;
+        // Guarda solo el nombre del archivo en la entidad del usuario
+        usuario.foto = file.filename;
       
-        // Guarda los cambios en la base de datos
         await this.usuarioRepository.save(usuario);
       
-        return usuario;
+        return file.filename; // Retorna el nombre del archivo
       }
-    
+      
 }
