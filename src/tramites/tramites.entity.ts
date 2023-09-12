@@ -10,7 +10,7 @@ export class TramitesEntity{
 
     @PrimaryGeneratedColumn()
     idSolicitud: number;
-    @Column({type: 'varchar',nullable: false, unique: true})
+    @Column({type: 'varchar',nullable: false})
     cc: number;
     @Column({type: 'varchar', length: 10, nullable: false})
     nombre: string;

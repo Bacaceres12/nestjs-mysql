@@ -127,11 +127,6 @@ export class TramitesService {
 
     
                             async create(dto: TramitesDto, usuario: UsuarioEntity): Promise<any> {
-                              const exists = await this.findByCC(dto.cc, usuario);
-                              if (exists) {
-                                  throw new BadRequestException('Ese número CC ya lo tiene otro usuario');
-                              }
-                      
                               const tramites = this.tramitesRepository.create(dto);
                               tramites.usuario = usuario;
                               tramites.nombre = dto.nombre;
@@ -174,7 +169,7 @@ export class TramitesService {
                             await transporter.sendMail(mailOptions);
                       
                               // Enviar notificación por mensaje de texto (Twilio)
-                              const client = twilio('ACd6c72172078222d60537a71e9a09f536', 'c0b8011de6bb6e6cfc14d648d17c7da7');
+                              const client = twilio('ACd6c72172078222d60537a71e9a09f536', '4a814bcfb9c6dd58a82e8b4eb25189b7');
                       
                               const numerosTelefonicos = [
                                 '+573142889518', // Número para WhatsApp
